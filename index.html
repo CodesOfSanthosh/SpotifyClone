@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify - Web Player: Music for everyone</title>
+    <!-- Use the new style sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body oncontextmenu="return false;"> <!-- Disable default context menu for realism -->
+
+    <div class="app-container">
+        <!-- ================= SIDEBAR ================= -->
+        <nav class="sidebar">
+            <div class="nav-section card-bg">
+                <div class="logo-container">
+                    <i class="fa-brands fa-spotify"></i> <span>Spotify</span>
+                </div>
+                <div class="nav-item active" data-target="home">
+                    <i class="fa-solid fa-house"></i> <span>Home</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-magnifying-glass"></i> <span>Search</span>
+                </div>
+            </div>
+
+            <div class="library-section card-bg">
+                <div class="lib-header">
+                    <button class="lib-toggle">
+                        <i class="fa-solid fa-layer-group"></i> <span>Your Library</span>
+                    </button>
+                    <div class="lib-icons">
+                        <button><i class="fa-solid fa-plus"></i></button>
+                        <button><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <div class="filter-chips">
+                    <button class="chip">Playlists</button>
+                    <button class="chip">Artists</button>
+                    <button class="chip">Albums</button>
+                </div>
+
+                <div class="lib-list" id="library-list">
+                    <!-- Javascript will populate this -->
+                    <div class="lib-item">
+                        <div class="grad-1" style="width:48px;height:48px;border-radius:4px;"></div>
+                        <div class="lib-item-text">
+                            <div class="lib-item-title">Liked Songs</div>
+                            <div class="lib-item-desc"><i class="fa-solid fa-thumbtack pinned"></i> Playlist • 120 songs
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ================= MAIN VIEW ================= -->
+        <main class="main-view">
+            <header class="top-nav">
+                <div class="history-btns">
+                    <button class="nav-circle" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="nav-circle"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="user-menu">
+                    <button class="install-app"><i class="fa-regular fa-circle-down"></i> Install App</button>
+                    <div class="profile-pill">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- HOME VIEW -->
+                <div id="home-view">
+                    <!-- Greatings -->
+                    <h2 style="font-size:2rem; font-weight:700; margin-bottom:24px;" id="greeting-text">Good afternoon
+                    </h2>
+
+                    <div class="cards-grid" style="margin-bottom:32px;">
+                        <!-- Top "Shortcuts" (Small Cards) would go here in real app, skipping for brevity -->
+                    </div>
+
+                    <div class="section-title">
+                        <h2>Made For You</h2>
+                        <a href="#">Show all</a>
+                    </div>
+                    <div class="cards-grid" id="mixes-grid">
+                        <!-- JS Rendered Cards -->
+                    </div>
+
+                    <div class="section-title">
+                        <h2>Recently Played</h2>
+                        <a href="#">Show all</a>
+                    </div>
+                    <div class="cards-grid" id="recent-grid">
+                        <!-- JS Rendered Cards -->
+                    </div>
+                </div>
+
+                <!-- PLAYLIST DETAILS VIEW (Hidden) -->
+                <div id="playlist-view" class="playlist-view">
+                    <!-- Header -->
+                    <div class="playlist-header" id="playlist-header-bg">
+                        <div class="playlist-cover-lg shadow-lg" id="playlist-cover"></div>
+                        <div class="playlist-meta">
+                            <span>Playlist</span>
+                            <h1 id="playlist-title">Playlist Name</h1>
+                            <div class="desc" id="playlist-desc">Description of the playlist goes here.</div>
+                            <div class="playlist-stats">
+                                <i class="fa-brands fa-spotify"></i> Spotify <span class="dot">•</span> <span
+                                    id="playlist-likes">1,234 likes</span> <span class="dot">•</span> <span
+                                    id="playlist-count">50 songs</span>, <span
+                                    style="color:#b3b3b3; font-weight:400;">about 3 hr 15 min</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls & Songs -->
+                    <div style="background: rgba(0,0,0,0.2); min-height: 500px;">
+                        <div class="playlist-controls">
+                            <div class="action-row">
+                                <button class="play-btn-huge"><i class="fa-solid fa-play"></i></button>
+                                <button class="like-btn" style="font-size:2rem;"><i
+                                        class="fa-regular fa-heart"></i></button>
+                                <button class="like-btn" style="font-size:1.5rem;"><i
+                                        class="fa-solid fa-ellipsis"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Table Header -->
+                        <div class="song-list-header">
+                            <div class="col-index">#</div>
+                            <div class="col-title">Title</div>
+                            <div class="col-album">Album</div>
+                            <div class="col-date">Date added</div>
+                            <div class="col-dur"><i class="fa-regular fa-clock"></i></div>
+                        </div>
+
+                        <!-- Song List Container -->
+                        <div id="songs-container">
+                            <!-- JS Renders Rows Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- ================= PLAYER BAR ================= -->
+        <footer class="now-playing-bar">
+            <!-- Left: Info -->
+            <div class="left-controls">
+                <div class="album-art-sm">
+                    <img id="player-img" src="https://via.placeholder.com/56" alt="">
+                </div>
+                <div class="track-details">
+                    <div class="track-name-sm" id="player-title">Nothing Playing</div>
+                    <div class="track-artist-sm" id="player-artist">Select a song</div>
+                </div>
+                <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+            </div>
+
+            <!-- Center: Controls -->
+            <div class="center-controls">
+                <div class="player-buttons">
+                    <button class="shuffle-btn"><i class="fa-solid fa-shuffle"></i></button>
+                    <button class="step-btn"><i class="fa-solid fa-backward-step"></i></button>
+                    <button class="btn-play-pause" id="main-play-btn"><i class="fa-solid fa-play"></i></button>
+                    <button class="step-btn"><i class="fa-solid fa-forward-step"></i></button>
+                    <button class="repeat-btn"><i class="fa-solid fa-repeat"></i></button>
+                </div>
+                <div class="playback-bar">
+                    <span id="curr-time">0:00</span>
+                    <div class="progress-rail" id="progress-rail">
+                        <div class="progress-fill" id="progress-fill"></div>
+                        <div class="thumb" id="progress-thumb"></div>
+                    </div>
+                    <span id="tot-time">0:00</span>
+                </div>
+            </div>
+
+            <!-- Right: Volume -->
+            <div class="right-controls">
+                <button><i class="fa-solid fa-microphone"></i></button>
+                <button><i class="fa-solid fa-layer-group"></i></button>
+                <div class="volume-container" style="display:flex; align-items:center; gap:8px;">
+                    <button><i class="fa-solid fa-volume-high"></i></button>
+                    <div class="volume-bar">
+                        <div class="volume-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
