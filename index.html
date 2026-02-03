@@ -5,19 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotify - Web Player: Music for everyone</title>
-    <!-- Use the new style sheet -->
+ 
     <link rel="stylesheet" href="style.css">
-    <!-- Fonts -->
+ 
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body oncontextmenu="return false;"> <!-- Disable default context menu for realism -->
+<body oncontextmenu="return false;"> 
 
     <div class="app-container">
-        <!-- ================= SIDEBAR ================= -->
+        
         <nav class="sidebar">
             <div class="nav-section card-bg">
                 <div class="logo-container">
@@ -49,7 +48,7 @@
                 </div>
 
                 <div class="lib-list" id="library-list">
-                    <!-- Javascript will populate this -->
+                    
                     <div class="lib-item">
                         <div class="grad-1" style="width:48px;height:48px;border-radius:4px;"></div>
                         <div class="lib-item-text">
@@ -62,7 +61,7 @@
             </div>
         </nav>
 
-        <!-- ================= MAIN VIEW ================= -->
+       
         <main class="main-view">
             <header class="top-nav">
                 <div class="history-btns">
@@ -78,14 +77,14 @@
             </header>
 
             <div class="content-area">
-                <!-- HOME VIEW -->
+                
                 <div id="home-view">
-                    <!-- Greatings -->
+                   
                     <h2 style="font-size:2rem; font-weight:700; margin-bottom:24px;" id="greeting-text">Good afternoon
                     </h2>
 
                     <div class="cards-grid" style="margin-bottom:32px;">
-                        <!-- Top "Shortcuts" (Small Cards) would go here in real app, skipping for brevity -->
+                       
                     </div>
 
                     <div class="section-title">
@@ -93,7 +92,7 @@
                         <a href="#">Show all</a>
                     </div>
                     <div class="cards-grid" id="mixes-grid">
-                        <!-- JS Rendered Cards -->
+                       
                     </div>
 
                     <div class="section-title">
@@ -101,13 +100,13 @@
                         <a href="#">Show all</a>
                     </div>
                     <div class="cards-grid" id="recent-grid">
-                        <!-- JS Rendered Cards -->
+                       
                     </div>
                 </div>
 
-                <!-- PLAYLIST DETAILS VIEW (Hidden) -->
+              
                 <div id="playlist-view" class="playlist-view">
-                    <!-- Header -->
+                    
                     <div class="playlist-header" id="playlist-header-bg">
                         <div class="playlist-cover-lg shadow-lg" id="playlist-cover"></div>
                         <div class="playlist-meta">
@@ -123,7 +122,7 @@
                         </div>
                     </div>
 
-                    <!-- Controls & Songs -->
+                 
                     <div style="background: rgba(0,0,0,0.2); min-height: 500px;">
                         <div class="playlist-controls">
                             <div class="action-row">
@@ -135,7 +134,7 @@
                             </div>
                         </div>
 
-                        <!-- Table Header -->
+                     
                         <div class="song-list-header">
                             <div class="col-index">#</div>
                             <div class="col-title">Title</div>
@@ -144,18 +143,18 @@
                             <div class="col-dur"><i class="fa-regular fa-clock"></i></div>
                         </div>
 
-                        <!-- Song List Container -->
+                        
                         <div id="songs-container">
-                            <!-- JS Renders Rows Here -->
+                        
                         </div>
                     </div>
                 </div>
             </div>
         </main>
 
-        <!-- ================= PLAYER BAR ================= -->
+       
         <footer class="now-playing-bar">
-            <!-- Left: Info -->
+          
             <div class="left-controls">
                 <div class="album-art-sm">
                     <img id="player-img" src="https://via.placeholder.com/56" alt="">
@@ -167,7 +166,7 @@
                 <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
             </div>
 
-            <!-- Center: Controls -->
+           
             <div class="center-controls">
                 <div class="player-buttons">
                     <button class="shuffle-btn"><i class="fa-solid fa-shuffle"></i></button>
@@ -186,7 +185,7 @@
                 </div>
             </div>
 
-            <!-- Right: Volume -->
+        
             <div class="right-controls">
                 <button><i class="fa-solid fa-microphone"></i></button>
                 <button><i class="fa-solid fa-layer-group"></i></button>
@@ -201,7 +200,7 @@
 
     </div>
 
-    <!-- Script -->
+
     <script src="script.js"></script>
 </body>
 
