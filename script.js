@@ -1,4 +1,3 @@
-/* Data Simulation */
 const playlists = [
     {
         id: 1,
@@ -57,26 +56,21 @@ const playlists = [
     }
 ];
 
-
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. Render Greeting ---
     const hour = new Date().getHours();
     let greeting = 'Good morning';
     if (hour >= 12 && hour < 18) greeting = 'Good afternoon';
     else if (hour >= 18) greeting = 'Good evening';
     document.getElementById('greeting-text').textContent = greeting;
 
-
-    // --- 2. Render Cards (Home View) ---
     const mixesGrid = document.getElementById('mixes-grid');
     const recentGrid = document.getElementById('recent-grid');
 
     function createCard(item) {
         const div = document.createElement('div');
         div.className = 'playable-card';
-        div.onclick = () => openPlaylist(item); /* Nav logic */
-
+        div.onclick = () => openPlaylist(item);
         div.innerHTML = `
             <div class="img-container">
                 <div class="${item.imgClass}" style="width:100%; height:100%;"></div>
@@ -88,14 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return div;
     }
 
-    // Populate "Made for You" (First 3)
     playlists.slice(0, 3).forEach(pl => mixesGrid.appendChild(createCard(pl)));
-    // Populate "Recently Played" (Last 2)
     playlists.slice(3, 5).forEach(pl => recentGrid.appendChild(createCard(pl)));
 
-    // Populate Sidebar Library
     const libList = document.getElementById('library-list');
-    libList.innerHTML = ''; // Clear static
+    libList.innerHTML = '';
     playlists.forEach(pl => {
         const item = document.createElement('div');
         item.className = 'lib-item';
@@ -110,42 +101,35 @@ document.addEventListener('DOMContentLoaded', () => {
         libList.appendChild(item);
     });
 
-
-    // --- 3. View Switching Logic ---
     const homeView = document.getElementById('home-view');
     const playlistView = document.getElementById('playlist-view');
-    const mainView = document.querySelector('.main-view'); // container to scroll to top
+    const mainView = document.querySelector('.main-view');
 
     function showHome() {
         homeView.style.display = 'block';
         playlistView.style.display = 'none';
         playlistView.classList.remove('active');
-        // Reset header opacity logic
         document.querySelector('.top-nav').style.backgroundColor = 'rgba(18,18,18,0.7)';
     }
 
-    // --- 4. Playlist Detail Rendering ---
     const plTitle = document.getElementById('playlist-title');
     const plDesc = document.getElementById('playlist-desc');
     const plCover = document.getElementById('playlist-cover');
     const songsContainer = document.getElementById('songs-container');
 
     function openPlaylist(playlistData) {
-        // Hide Home, Show Playlist
         homeView.style.display = 'none';
         playlistView.style.display = 'block';
         playlistView.classList.add('active');
-        mainView.scrollTop = 0; // Scroll to top
+        mainView.scrollTop = 0;
 
-        // Set Header Data
         plTitle.textContent = playlistData.title;
         plDesc.textContent = playlistData.description;
         plCover.className = `playlist-cover-lg shadow-lg ${playlistData.imgClass}`;
 
-        // Render Songs
-        songsContainer.innerHTML = ''; // Clear
+        songsContainer.innerHTML = '';
         if (playlistData.songs.length === 0) {
-            songsContainer.innerHTML = '<div style="padding:24px; color:#b3b3b3;">No songs here yet. (Simulated empty playlist)</div>';
+            songsContainer.innerHTML = '<div style="padding:24px; color:#b3b3b3;">No songs here yet.</div>';
         } else {
             playlistData.songs.forEach((song, index) => {
                 const row = document.createElement('div');
@@ -168,29 +152,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Dynamic Header Color (Simple Simulation)
-        const headerBg = document.querySelector('.main-view');
-        // We can just change the gradient of the main view based on playlist
-        // Reset first
-        headerBg.style.backgroundImage = `linear-gradient(to bottom, #444, #121212 300px)`;
-        // We could map specific colors from the gradient classes if we want to be fancy, but generic dark gray is safe.
+        document.querySelector('.main-view').style.backgroundImage =
+            `linear-gradient(to bottom, #444, #121212 300px)`;
     }
 
-
-    // --- 5. Navigation ---
     document.querySelectorAll('.nav-item').forEach(nav => {
         nav.addEventListener('click', function () {
-            // Simple logic: if home clicked, go home
-            if (this.innerText.includes('Home')) {
-                showHome();
-            }
+            if (this.innerText.includes('Home')) showHome();
         });
     });
-    // Back arrow simulation
+
     document.querySelector('.nav-circle:nth-child(1)').addEventListener('click', showHome);
 
-
-    // --- 6. Music Player Logic (Simulated) ---
     const playerTitle = document.getElementById('player-title');
     const playerArtist = document.getElementById('player-artist');
     const playerImg = document.getElementById('player-img');
@@ -201,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const totTimeElem = document.getElementById('tot-time');
 
     let isPlaying = false;
-    let currentProgress = 0; // 0 to 100
+    let currentProgress = 0;
     let progressInterval = null;
 
     function playSong(song) {
@@ -209,8 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
         playerArtist.textContent = song.artist;
         playerImg.src = song.img;
         totTimeElem.textContent = song.duration;
-
-        // Auto Play
         isPlaying = true;
         currentProgress = 0;
         updatePlayButton();
@@ -225,48 +196,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function updatePlayButton() {
-        if (isPlaying) {
-            mainPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-        } else {
-            mainPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-        }
+        mainPlayBtn.innerHTML = isPlaying
+            ? '<i class="fa-solid fa-pause"></i>'
+            : '<i class="fa-solid fa-play"></i>';
     }
 
     function startProgress() {
         clearInterval(progressInterval);
         progressInterval = setInterval(() => {
-            currentProgress += 0.2; // Speed simulation
+            currentProgress += 0.2;
             if (currentProgress > 100) {
-                currentProgress = 0; // Loop or Stop
-                // For realism, let's stop
+                currentProgress = 0;
                 isPlaying = false;
                 updatePlayButton();
                 clearInterval(progressInterval);
             }
-            // Update Visuals
             progressFill.style.width = `${currentProgress}%`;
-            progressThumb.style.left = `calc(${currentProgress}% - 6px)`; // thumb follows
+            progressThumb.style.left = `calc(${currentProgress}% - 6px)`;
 
-            // Update Time Text (Fake math based on 3:00 minute song)
-            let totalSeconds = 180; // 3 mins
+            let totalSeconds = 180;
             let currentSec = Math.floor((currentProgress / 100) * totalSeconds);
             let min = Math.floor(currentSec / 60);
             let sec = currentSec % 60;
             if (sec < 10) sec = '0' + sec;
             currTimeElem.textContent = `${min}:${sec}`;
-
         }, 200);
     }
 
-    // Header Scroll Effect
     mainView.addEventListener('scroll', () => {
         const topNav = document.querySelector('.top-nav');
-        if (mainView.scrollTop > 50) {
-            topNav.classList.add('scrolled');
-            // Show Playlist Title in Header if in Playlist View? (Advanced detail, skipping for now)
-        } else {
-            topNav.classList.remove('scrolled');
-        }
+        if (mainView.scrollTop > 50) topNav.classList.add('scrolled');
+        else topNav.classList.remove('scrolled');
     });
 
 });
